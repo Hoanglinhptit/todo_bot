@@ -23,6 +23,9 @@ class TelegramBot extends TelegramLongPollingBot {
     @Value('${openai.api.key}')
     private String openaiApiKey
 
+    private ArrayList<String> name;
+
+
     TelegramBot() {
         super('7023268217:AAGhTqdpt4PxvEf_5dJIKXpnd76LP_jXG3c')
 //        super()
@@ -30,6 +33,7 @@ class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     void onUpdateReceived(Update update) {
+
         println(update)
         if (update.hasMessage() && update.getMessage().hasText()) {
             String message_text = update.getMessage().getText()
