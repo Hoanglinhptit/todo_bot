@@ -14,6 +14,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 
+
+
 @Component
 class TelegramBot extends TelegramLongPollingBot {
     @Value('${telegram.bot.token}')
@@ -22,15 +24,12 @@ class TelegramBot extends TelegramLongPollingBot {
     @Value('${telegram.bot.name}')
     private String botUsername
 
-    @Value('${telegram.bot.server}')
-    private String serverUrl
-
     @Autowired
     private DefaultBotOptions defaultBotOptions
 
-    TelegramBot(){
-        super("7023268217:AAGhTqdpt4PxvEf_5dJIKXpnd76LP_jXG3c")
-    }
+//    TelegramBot(DefaultBotOptions defaultBotOptions) {
+//        super(defaultBotOptions)
+//    }
 
     @Override
     void onUpdateReceived(Update update) {
