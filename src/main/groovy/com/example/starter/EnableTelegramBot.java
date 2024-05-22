@@ -1,6 +1,7 @@
-package org.telegram.telegrambots.starter;
+package com.example.starter;
 
 import org.springframework.context.annotation.Import;
+import org.telegram.telegrambots.starter.TelegramBotStarterConfiguration;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

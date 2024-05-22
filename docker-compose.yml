@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: todo_list
+    environment:
+      MYSQL_ROOT_PASSWORD: maimeo
+      MYSQL_DATABASE: telebot
+      MYSQL_USER: root
+      MYSQL_PASSWORD: maimeo
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
