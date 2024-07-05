@@ -20,12 +20,12 @@ class TaskControllers {
     }
 
     @GetMapping("/list")
-    List<Task> getAllTasksByChatId(@RequestBody Long chatId) {
+    List<Task> getAllTasksByChatId(@RequestParam("chatId") Long chatId) {
         taskService.getAllTasksByChatId(chatId)
     }
 
     @GetMapping("/detail/{id}")
-    Task getTaskByIdAndChatId(@PathVariable Long id, @RequestBody Long chatId) {
+    Task getTaskByIdAndChatId(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId) {
         taskService.getTaskByIdAndChatId(id, chatId)
                 .orElseThrow { new RuntimeException("Task not found with id: $id for chatId: $chatId") }
     }
@@ -36,14 +36,14 @@ class TaskControllers {
     }
 
     @PutMapping("/update/{id}")
-    Task updateTask(@PathVariable Long id, @RequestBody Long chatId, @RequestBody Task task) {
+    Task updateTask(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId, @RequestBody Task task) {
         task.id = id
         task.chatId = chatId
         taskService.saveOrUpdateTask(task)
     }
 
     @DeleteMapping("/delete/{id}")
-    void deleteTask(@PathVariable Long id, @RequestParam Long chatId) {
+    void deleteTask(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId) {
         taskService.deleteTaskByIdAndChatId(id, chatId)
     }
 }
