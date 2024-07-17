@@ -1,33 +1,52 @@
-package com.example.services
+package com.example.services;
 
+import com.example.entities.Task;
+import com.example.repositories.TaskRepository;
+import org.ff4j.FF4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.entities.Task
-import com.example.repositories.TaskRepository
-import org.ff4j.FF4j
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
+import java.util.List;
+import java.util.Optional;
 
 @Service
-class TaskService {
+public class TaskService {
+
     @Autowired
     private FF4j ff4j;
 
     @Autowired
-    private TaskRepository taskRepository
+    private TaskRepository taskRepository;
 
-    List<Task> getAllTasksByChatId(Long chatId) {
-        taskRepository.findByChatId(chatId)
+    public List<Task> getAllTasksByChatId(Long chatId) {
+        if (ff4j.check("get-task-feature")) {
+            return taskRepository.findByChatId(chatId);
+        }
+        throw new RuntimeException("get-task-feature is not enabled");
     }
 
-    Optional<Task> getTaskByIdAndChatId(Long id, Long chatId) {
-        taskRepository.findByIdAndChatId(id, chatId)
+    public Optional<Task> getTaskByIdAndChatId(Long id, Long chatId) {
+        if (ff4j.check("get-task-feature")) {
+            return taskRepository.findByIdAndChatId(id, chatId);
+        }
+        throw new RuntimeException("get-task-feature is not enabled");
     }
 
-    Task saveOrUpdateTask(Task task) {
-        taskRepository.save(task)
+    public Task saveOrUpdateTask(Task task) {
+        if (ff4j.check("update-task-feature")) {
+            return taskRepository.save(task);
+        }
+
+        throw new RuntimeException("update-task-feature is not enabled");
     }
 
-    void deleteTaskByIdAndChatId(Long id, Long chatId) {
-        taskRepository.deleteByIdAndChatId(id, chatId)
+    @Transactional
+    public void deleteTaskByIdAndChatId(Long id, Long chatId) {
+        if (ff4j.check("delete-task-feature")) {
+            taskRepository.deleteByIdAndChatId(id, chatId);
+        } else {
+            throw new RuntimeException("delete-task-feature is not enabled");
+        }
     }
 }

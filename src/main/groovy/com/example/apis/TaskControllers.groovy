@@ -35,15 +35,16 @@ class TaskControllers {
         taskService.saveOrUpdateTask(task)
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     Task updateTask(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId, @RequestBody Task task) {
         task.id = id
         task.chatId = chatId
         taskService.saveOrUpdateTask(task)
     }
 
-    @DeleteMapping("/delete/{id}")
-    void deleteTask(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId) {
+    @DeleteMapping("/{id}")
+    String deleteTask(@PathVariable("id") Long id, @RequestParam("chatId") Long chatId) {
         taskService.deleteTaskByIdAndChatId(id, chatId)
+        return "OK"
     }
 }

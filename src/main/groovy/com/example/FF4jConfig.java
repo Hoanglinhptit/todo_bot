@@ -13,11 +13,6 @@ public class FF4jConfig {
     public FF4j getFF4j() {
         FF4j ff4j = new FF4j();
 
-        /*
-         * Implementation of each store. Here this is boiler plate as if nothing
-         * is specified the inmemory is used. Those are really the one that will
-         * change depending on your technology.
-         */
         ff4j.setFeatureStore(new InMemoryFeatureStore());
         ff4j.setPropertiesStore(new InMemoryPropertyStore());
         ff4j.setEventRepository(new InMemoryEventRepository());
@@ -33,6 +28,10 @@ public class FF4jConfig {
 
         // To define a cacher layer to relax the DB, multiple implementations
         //ff4j.cache([a cache Manager]);
+        ff4j.createFeature("delete-task-feature");
+        ff4j.createFeature("update-task-feature");
+        ff4j.createFeature("create-task-feature");
+        ff4j.createFeature("get-task-feature");
 
         return ff4j;
     }
