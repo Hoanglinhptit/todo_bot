@@ -1,4 +1,4 @@
-package com.example;
+package com.example.config;
 
 import org.ff4j.FF4j;
 import org.ff4j.web.FF4jDispatcherServlet;

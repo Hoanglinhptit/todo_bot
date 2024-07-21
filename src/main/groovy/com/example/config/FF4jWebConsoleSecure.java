@@ -1,7 +1,5 @@
-package com.example;
+package com.example.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +23,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
 public class FF4jWebConsoleSecure {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FF4jWebConsoleSecure.class);
-
     @Value("${ff4j.webconsole.username:admin}")
     private String admin;
 
