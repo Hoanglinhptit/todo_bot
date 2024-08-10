@@ -1,5 +1,6 @@
 package com.example.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -48,6 +51,21 @@ public class DataSourceConfig {
         routingDataSource.setTargetDataSources(targetDataSources);
 
         return routingDataSource;
+    }
+//    @Bean(name = "entityManagerFactory")
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+//            EntityManagerFactoryBuilder builder) {
+//        return builder
+//                .dataSource(dataSource())
+//                .packages("com.example.entity") // package chứa các entity
+//                .persistenceUnit("default")
+//                .build();
+//    }
+
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager(
+            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 }
 

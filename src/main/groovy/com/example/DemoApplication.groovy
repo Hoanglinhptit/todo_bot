@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.config.DataSourceContextHolder
 import com.example.starter.EnableTelegramBot
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
